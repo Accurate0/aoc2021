@@ -12,18 +12,13 @@ Console.WriteLine(@$"Problem 1: {lines.Select(num =>
 // task 2
 int oldWindow = lines.Take(3).Sum();
 int windowIndex = 0;
-int count = 0;
 
-for (int i = 0; i < (int)Math.Ceiling(lines.Count() / 3.0) * 3; i++)
+Console.WriteLine(@$"Problem 2: {Enumerable.Range(9, (int)Math.Ceiling(lines.Count() / 3.0) * 3).Select(_ =>
 {
     int newWindow = lines.Skip(windowIndex).Take(3).Sum();
-    windowIndex++;
-    if (newWindow > oldWindow)
-    {
-        count++;
-    }
-
+    int old = oldWindow;
     oldWindow = newWindow;
-}
-
-Console.WriteLine($"Problem 2: {count}");
+    windowIndex++;
+    return newWindow > old;
+}).Count(x => x)
+}");
